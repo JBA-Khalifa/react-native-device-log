@@ -3,7 +3,7 @@ import moment from "moment";
 import InMemory from "./adapters/in-memory";
 import timers from "./timers";
 import debounce from "debounce";
-import stacktraceParser from "stacktrace-parser";
+import * as stacktraceParser from "stacktrace-parser";
 import stringify from "json-stringify-safe";
 import StringifyDataWriter from "./data-writers/stringify-data-writer";
 import guid from "./guid";
@@ -257,10 +257,10 @@ class DebugService {
                             : stackTraceItem.methodName;
                 }
                 if (stackTraceItem.lineNumber !== undefined) {
-                    lineNumber = stackTraceItem.lineNumber.toString();
+                    lineNumber = stackTraceItem.lineNumber;
                 }
                 if (stackTraceItem.column !== undefined) {
-                    column = stackTraceItem.column.toString();
+                    column = stackTraceItem.column;
                 }
                 return `Method: ${methodName}, LineNumber: ${lineNumber}, Column: ${column}\n`;
             });
@@ -335,7 +335,7 @@ class DebugService {
                     console[this.options.logToConsoleMethod](...logRows);
                 }
             }
-   
+
         }
     }
 
